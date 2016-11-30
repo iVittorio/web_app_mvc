@@ -33,10 +33,21 @@ public class JournalDao {
 
                 list.add(new Journal(id, name));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void addEntryInJournal(String login, int id) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO JOURNAL (id_user, id_lection) VALUES ((SELECT id FROM users where login=?), ?)")) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setInt(2, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

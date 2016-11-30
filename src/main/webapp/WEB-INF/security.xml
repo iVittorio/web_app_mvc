@@ -14,6 +14,7 @@
         <intercept-url pattern="/lections/add/**" access="hasRole('ROLE_TEACHER')"/>
         <intercept-url pattern="/lections" access="hasAnyRole('ROLE_STUDENT','ROLE_TEACHER')"/>
         <intercept-url pattern="/lections/show/" access="hasAnyRole('ROLE_STUDENT','ROLE_TEACHER')"/>
+        <intercept-url pattern="/lections/journal/**" access="hasAnyRole('ROLE_STUDENT','ROLE_TEACHER')"/>
         <form-login
                 login-page="/signin"
                 login-processing-url="/appLogin"

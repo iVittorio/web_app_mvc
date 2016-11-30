@@ -52,9 +52,13 @@ public class LectionController {
     }
 
     @RequestMapping(value = "/lections/show/{id}")
-    public String showLection(@PathVariable int id, Model model) {
+    public String showLection(@PathVariable int id, Model model, HttpServletRequest request) {
+        String login = request.getUserPrincipal().getName();
+
+        System.out.println("DEBUG: " + login);
         Lection lection = lectionDao.getLectionById(id);
         model.addAttribute("lection", lection);
+        model.addAttribute("login", login);
         return "/lections/show";
     }
 
