@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.innopolis.web.beans.User;
 import ru.innopolis.web.dao.UserDao;
+import ru.innopolis.web.dao.UserDaoImpl;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class UserController {
 
     /*@RequestMapping(value = "/users/delete/{id}")
     public String deleteUser(@PathVariable int id) {
-        userDao.deleteUserById(id);
+        userDaoImpl.deleteUserById(id);
         return "redirect:/users";
     }*/
 }

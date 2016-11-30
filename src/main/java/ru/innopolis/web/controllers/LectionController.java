@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.innopolis.web.beans.Lection;
 import ru.innopolis.web.dao.LectionDao;
+import ru.innopolis.web.dao.LectionDaoImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

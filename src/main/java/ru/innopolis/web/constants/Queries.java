@@ -15,4 +15,6 @@ public class Queries {
     public static final String ADD_LECTION_QUERY = "INSERT INTO LECTIONS (name, text) VALUES (?,?)";
     public static final String EDIT_LECTION_QUERY = "UPDATE LECTIONS SET NAME=?, TEXT=? WHERE ID =?";
     public static final String GET_USERS_QUERY = "SELECT * FROM USERS";
+    public static final String SHOW_USER_JOURNAL = "SELECT DISTINCT id_user, name FROM journal, lections WHERE id_lection=id AND id_user=?";
+    public static final String ADD_LECTION_IN_JOURNAL = "INSERT INTO JOURNAL (id_user, id_lection) VALUES ((SELECT id FROM users where login=?), ?)";
 }
