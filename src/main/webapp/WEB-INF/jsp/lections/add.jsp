@@ -1,5 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/WEB-INF/jsp/logout.jsp"/>
 
 <h1>Add Lection</h1>
 <form:form method="POST" action="/lections/addsave">
@@ -20,3 +21,4 @@
         </tr>
     </table>
 </form:form>
+<a href="/lections">Back to Lection list</a>

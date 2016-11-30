@@ -1,5 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="/WEB-INF/jsp/logout.jsp"/>
 
 <h1>Users List</h1>
 <table border="2" width="70%" cellpadding="2">
@@ -24,4 +25,5 @@
         </tr>
     </c:forEach>
 </table>
+<a href="/lections">Back to Lection list</a>
 <br/>

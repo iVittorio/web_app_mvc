@@ -22,8 +22,8 @@
                 password-parameter="password"
                 default-target-url="/lections"/>
         <logout
-                logout-url="/appLogout"
-                logout-success-url="/customLogin.jsp"/>
+                logout-url="/logout"
+                logout-success-url="/signin"/>
     </http>
 
 
