@@ -25,7 +25,7 @@ dependencies {
     compile group: 'jstl', name: 'jstl', version: '1.2'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
     compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '9.0.0.M13'
-
+    testCompile "org.mockito:mockito-core:1.+"
     compile "org.slf4j:slf4j-api:1.7.21"
     compile "org.slf4j:slf4j-log4j12:1.7.21"
 }
