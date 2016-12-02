@@ -31,6 +31,10 @@ public class JournalDaoImpl implements JournalDao {
         this.dataSource = dataSource;
     }
 
+    /**
+     * @param id the user number to get the journal
+     * @return journal list
+     */
     @ExceptionHandler(MyException.class)
     public List<Journal> showJurnalByIdUser(int id) {
         List<Journal> list = new ArrayList<>();
@@ -50,6 +54,12 @@ public class JournalDaoImpl implements JournalDao {
         return list;
     }
 
+    /**
+     * Add entry in journal
+     *
+     * @param login user login whose complete lection
+     * @param id    lection id
+     */
     @ExceptionHandler(MyException.class)
     public void addEntryInJournal(String login, int id) {
 

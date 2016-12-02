@@ -30,6 +30,9 @@ public class LectionDaoImpl implements LectionDao {
         this.dataSource = dataSource;
     }
 
+    /**
+     * @return list lections from database
+     */
     @ExceptionHandler(MyException.class)
     public List<Lection> getLections() {
         List<Lection> lections = new ArrayList<>();
@@ -49,6 +52,10 @@ public class LectionDaoImpl implements LectionDao {
         return lections;
     }
 
+    /**
+     * @param id lection
+     * @return Lection from database
+     */
     @ExceptionHandler(MyException.class)
     public Lection getLectionById(int id) {
         Lection lection = null;
@@ -69,6 +76,10 @@ public class LectionDaoImpl implements LectionDao {
         return lection;
     }
 
+    /**
+     * Delete lection from database
+     * @param id
+     */
     @ExceptionHandler(MyException.class)
     public void deletLectionById(int id) {
         try (Connection connection = dataSource.getConnection();
@@ -81,6 +92,10 @@ public class LectionDaoImpl implements LectionDao {
         }
     }
 
+    /**
+     * Add lection in database
+     * @param lection
+     */
     @ExceptionHandler(MyException.class)
     public void addLection(Lection lection) {
         try (Connection connection = dataSource.getConnection();
@@ -94,6 +109,10 @@ public class LectionDaoImpl implements LectionDao {
         }
     }
 
+    /**
+     * Edit lection in database
+     * @param lection
+     */
     @ExceptionHandler(MyException.class)
     public void editLection(Lection lection) {
         try (Connection connection = dataSource.getConnection();

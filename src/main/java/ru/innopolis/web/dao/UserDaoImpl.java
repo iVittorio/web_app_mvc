@@ -33,6 +33,9 @@ public class UserDaoImpl implements UserDao {
         this.dataSource = dataSource;
     }
 
+    /**
+     * @return the list of users from database
+     */
     @ExceptionHandler(MyException.class)
     public List<User> showUsers() {
         List<User> list = new ArrayList<>();
@@ -55,6 +58,11 @@ public class UserDaoImpl implements UserDao {
         return list;
     }
 
+    /**
+     * Add new user in database
+     * @param user object user
+     * @param password hashed password
+     */
     @ExceptionHandler(MyException.class)
     public void addUser(User user, String password) {
         try (Connection connection = dataSource.getConnection();
@@ -72,6 +80,11 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Return object user from database by id
+     * @param id user in database
+     * @return object user with filled field from database
+     */
     @ExceptionHandler(MyException.class)
     public User getUserById(int id) {
         User user = new User();
@@ -94,6 +107,10 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    /**
+     * Update field values of user. Looking for by id
+     * @param user object user
+     */
     @ExceptionHandler(MyException.class)
     public void updateUser(User user) {
         try (Connection connection = dataSource.getConnection();
@@ -110,6 +127,10 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Delete user in database finds by id.
+     * @param id user in database
+     */
     @ExceptionHandler(MyException.class)
     public void deleteUserById(int id) {
         try (Connection connection = dataSource.getConnection();
@@ -122,6 +143,13 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Verify login data. Compare login and password in database and return -1 if match is not found,
+     * return id user if match find
+     * @param login
+     * @param password
+     * @return id user in data base if there is a match, -1 if match is not found.
+     */
     @ExceptionHandler(MyException.class)
     public int verifyLoginData(String login, String password) {
         int result = -1;
