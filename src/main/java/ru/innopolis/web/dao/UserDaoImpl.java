@@ -54,8 +54,8 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, user.getFullName());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString(5, user.getRole().toString());
-            preparedStatement.setString(6, user.getSex().toString());
+            preparedStatement.setString(5, user.getSex().toString());
+            preparedStatement.setString(6, user.getRole().toString());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

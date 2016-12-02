@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.innopolis.web.beans.Journal;
-import ru.innopolis.web.dao.JournalDao;
+import ru.innopolis.web.service.JournalService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,16 +17,16 @@ import java.util.List;
  */
 @Controller
 public class JournalController {
-    private JournalDao journalDao;
+    private JournalService journalService;
 
     @Autowired
-    public JournalController(JournalDao journalDao) {
-        this.journalDao = journalDao;
+    public JournalController(JournalService journalService) {
+        this.journalService = journalService;
     }
 
     @RequestMapping(value = "/users/journal/{id}")
     public String showJournal(@PathVariable int id, HttpServletRequest request, Model model) {
-        List<Journal> list = journalDao.showJurnalByIdUser(id);
+        List<Journal> list = journalService.showJurnalByIdUser(id);
         model.addAttribute("list", list);
         return "/users/journal";
     }
@@ -35,7 +35,7 @@ public class JournalController {
     public String addEntry(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         String login = request.getParameter("login");
-        journalDao.addEntryInJournal(login, id);
+        journalService.addEntryInJournal(login, id);
         return "redirect:/lections";
     }
 

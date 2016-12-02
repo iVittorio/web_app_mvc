@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.innopolis.web.beans.User;
-import ru.innopolis.web.dao.UserDao;
-import ru.innopolis.web.dao.UserDaoImpl;
+import ru.innopolis.web.constants.Role;
+import ru.innopolis.web.constants.Sex;
+import ru.innopolis.web.service.UserService;
 
 import java.util.List;
 
@@ -17,11 +19,11 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private UserDao userDao;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserDao userDao) {
-        this.userDao = userDao;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping("/")
@@ -31,7 +33,7 @@ public class UserController {
 
     @RequestMapping("/users")
     public String showUsers(Model model) {
-        List<User> list = userDao.showUsers();
+        List<User> list = userService.showUsers();
         model.addAttribute("list", list);
         return "users";
     }
@@ -46,9 +48,19 @@ public class UserController {
         return "signin_failure";
     }
 
-    /*@RequestMapping(value = "/users/delete/{id}")
-    public String deleteUser(@PathVariable int id) {
-        userDaoImpl.deleteUserById(id);
-        return "redirect:/users";
-    }*/
+    @RequestMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
+    @RequestMapping(value = "/signup/add", method = RequestMethod.POST)
+    public String addUser(
+            @RequestParam(name = "login") String login,
+            @RequestParam(name = "password") String password,
+            @RequestParam(name = "fullName") String fullName,
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "sex") String sex) {
+        userService.addUser(new User(0, login, fullName, email, Role.ROLE_STUDENT, Sex.valueOf(sex)), password);
+        return "redirect:/signin";
+    }
 }
