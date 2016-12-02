@@ -4,9 +4,6 @@
 </head>
 <body>
 <h3>Sign In</h3>
-<font color="red">
-    ${SPRING_SECURITY_LAST_EXCEPTION.message}
-</font>
 <form action="<%=request.getContextPath()%>/appLogin" method="POST">
     Enter UserName: <input type="text" name="username"/><br/><br/>
     Enter Password: <input type="password" name="password"/> <br/><br/>

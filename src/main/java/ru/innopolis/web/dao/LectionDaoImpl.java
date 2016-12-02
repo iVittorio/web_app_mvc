@@ -33,7 +33,7 @@ public class LectionDaoImpl implements LectionDao {
     /**
      * @return list lections from database
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public List<Lection> getLections() {
         List<Lection> lections = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
@@ -56,7 +56,7 @@ public class LectionDaoImpl implements LectionDao {
      * @param id lection
      * @return Lection from database
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public Lection getLectionById(int id) {
         Lection lection = null;
         try (Connection connection = dataSource.getConnection();
@@ -80,7 +80,7 @@ public class LectionDaoImpl implements LectionDao {
      * Delete lection from database
      * @param id
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void deletLectionById(int id) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_LECTION_BY_ID_QUERY)) {
@@ -96,7 +96,7 @@ public class LectionDaoImpl implements LectionDao {
      * Add lection in database
      * @param lection
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void addLection(Lection lection) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_LECTION_QUERY)) {
@@ -113,7 +113,7 @@ public class LectionDaoImpl implements LectionDao {
      * Edit lection in database
      * @param lection
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void editLection(Lection lection) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(EDIT_LECTION_QUERY)) {

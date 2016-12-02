@@ -16,6 +16,7 @@
         <intercept-url pattern="/lections/show/" access="hasAnyRole('ROLE_STUDENT','ROLE_TEACHER')"/>
         <intercept-url pattern="/lections/journal/**" access="hasAnyRole('ROLE_STUDENT','ROLE_TEACHER')"/>
         <intercept-url pattern="/signup/**" access="permitAll"/>
+        <intercept-url pattern="/ErrorPage" access="permitAll"/>
         <csrf disabled="true"/>
         <form-login
                 login-page="/signin"

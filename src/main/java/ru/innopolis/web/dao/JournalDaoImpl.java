@@ -35,7 +35,7 @@ public class JournalDaoImpl implements JournalDao {
      * @param id the user number to get the journal
      * @return journal list
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public List<Journal> showJurnalByIdUser(int id) {
         List<Journal> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
@@ -60,7 +60,7 @@ public class JournalDaoImpl implements JournalDao {
      * @param login user login whose complete lection
      * @param id    lection id
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void addEntryInJournal(String login, int id) {
 
         try (Connection connection = dataSource.getConnection();

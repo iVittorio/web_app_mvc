@@ -16,13 +16,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
-            <props>
-                <prop key="ru.innopolis.web.exception.MyException">
-                    ErrorPage
-                </prop>
-            </props>
+            <map>
+                <entry key="MyException" value="ErrorPage"/>
+            </map>
         </property>
-        <property name="defaultErrorView" value="error"/>
+        <property name="defaultErrorView" value="ErrorPage"/>
     </bean>
 
 </beans>

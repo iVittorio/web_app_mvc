@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     /**
      * @return the list of users from database
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public List<User> showUsers() {
         List<User> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDao {
      * @param user object user
      * @param password hashed password
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void addUser(User user, String password) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_QUERY)) {
@@ -85,7 +85,7 @@ public class UserDaoImpl implements UserDao {
      * @param id user in database
      * @return object user with filled field from database
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public User getUserById(int id) {
         User user = new User();
         try (Connection connection = dataSource.getConnection();
@@ -111,7 +111,7 @@ public class UserDaoImpl implements UserDao {
      * Update field values of user. Looking for by id
      * @param user object user
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void updateUser(User user) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(EDIT_USER_QUERY)) {
@@ -131,7 +131,7 @@ public class UserDaoImpl implements UserDao {
      * Delete user in database finds by id.
      * @param id user in database
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public void deleteUserById(int id) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER_BY_ID_QUERY)) {
@@ -150,7 +150,7 @@ public class UserDaoImpl implements UserDao {
      * @param password
      * @return id user in data base if there is a match, -1 if match is not found.
      */
-    @ExceptionHandler(MyException.class)
+    @ExceptionHandler({MyException.class})
     public int verifyLoginData(String login, String password) {
         int result = -1;
         try (Connection connection = dataSource.getConnection();
