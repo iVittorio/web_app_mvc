@@ -3,7 +3,9 @@ package ru.innopolis.web.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.innopolis.web.beans.Lection;
+import ru.innopolis.web.exception.MyException;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -28,6 +30,7 @@ public class LectionDaoImpl implements LectionDao {
         this.dataSource = dataSource;
     }
 
+    @ExceptionHandler(MyException.class)
     public List<Lection> getLections() {
         List<Lection> lections = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
@@ -41,10 +44,12 @@ public class LectionDaoImpl implements LectionDao {
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in getLections method", e);
+            throw new MyException(e.getMessage());
         }
         return lections;
     }
 
+    @ExceptionHandler(MyException.class)
     public Lection getLectionById(int id) {
         Lection lection = null;
         try (Connection connection = dataSource.getConnection();
@@ -59,10 +64,12 @@ public class LectionDaoImpl implements LectionDao {
 
         } catch (SQLException e) {
             logger.error("Error with SQL in getLectionById method", e);
+            throw new MyException(e.getMessage());
         }
         return lection;
     }
 
+    @ExceptionHandler(MyException.class)
     public void deletLectionById(int id) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_LECTION_BY_ID_QUERY)) {
@@ -70,9 +77,11 @@ public class LectionDaoImpl implements LectionDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error with SQL in deletLectionById method", e);
+            throw new MyException(e.getMessage());
         }
     }
 
+    @ExceptionHandler(MyException.class)
     public void addLection(Lection lection) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_LECTION_QUERY)) {
@@ -81,9 +90,11 @@ public class LectionDaoImpl implements LectionDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             logger.error("Error with SQL in addLection method", e);
+            throw new MyException(e.getMessage());
         }
     }
 
+    @ExceptionHandler(MyException.class)
     public void editLection(Lection lection) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(EDIT_LECTION_QUERY)) {
@@ -93,6 +104,7 @@ public class LectionDaoImpl implements LectionDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             logger.error("Error with SQL in editLection method", e);
+            throw new MyException(e.getMessage());
         }
     }
 }

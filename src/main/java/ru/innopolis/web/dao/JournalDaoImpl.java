@@ -1,7 +1,11 @@
 package ru.innopolis.web.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.innopolis.web.beans.Journal;
+import ru.innopolis.web.exception.MyException;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -10,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static ru.innopolis.web.constants.Queries.ADD_LECTION_IN_JOURNAL;
 import static ru.innopolis.web.constants.Queries.SHOW_USER_JOURNAL;
@@ -29,6 +31,7 @@ public class JournalDaoImpl implements JournalDao {
         this.dataSource = dataSource;
     }
 
+    @ExceptionHandler(MyException.class)
     public List<Journal> showJurnalByIdUser(int id) {
         List<Journal> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
@@ -42,10 +45,12 @@ public class JournalDaoImpl implements JournalDao {
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in showJurnalByIdUser method", e);
+            throw new MyException(e.getMessage());
         }
         return list;
     }
 
+    @ExceptionHandler(MyException.class)
     public void addEntryInJournal(String login, int id) {
 
         try (Connection connection = dataSource.getConnection();
@@ -55,6 +60,7 @@ public class JournalDaoImpl implements JournalDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             logger.error("Error with SQL in addEntryInJournal method", e);
+            throw new MyException(e.getMessage());
         }
     }
 }

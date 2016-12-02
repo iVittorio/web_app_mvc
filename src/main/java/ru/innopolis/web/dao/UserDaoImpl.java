@@ -4,9 +4,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.innopolis.web.beans.User;
 import ru.innopolis.web.constants.Role;
 import ru.innopolis.web.constants.Sex;
+import ru.innopolis.web.exception.MyException;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -31,6 +33,7 @@ public class UserDaoImpl implements UserDao {
         this.dataSource = dataSource;
     }
 
+    @ExceptionHandler(MyException.class)
     public List<User> showUsers() {
         List<User> list = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
@@ -47,10 +50,12 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in showUsers method", e);
+            throw new MyException(e.getMessage());
         }
         return list;
     }
 
+    @ExceptionHandler(MyException.class)
     public void addUser(User user, String password) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_QUERY)) {
@@ -63,9 +68,11 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             logger.error("Error with SQL in addUser method", e);
+            throw new MyException(e.getMessage());
         }
     }
 
+    @ExceptionHandler(MyException.class)
     public User getUserById(int id) {
         User user = new User();
         try (Connection connection = dataSource.getConnection();
@@ -82,10 +89,12 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in getUserById method", e);
+            throw new MyException(e.getMessage());
         }
         return user;
     }
 
+    @ExceptionHandler(MyException.class)
     public void updateUser(User user) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(EDIT_USER_QUERY)) {
@@ -97,9 +106,11 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.execute();
         } catch (SQLException e) {
             logger.error("Error with SQL in updateUser method", e);
+            throw new MyException(e.getMessage());
         }
     }
 
+    @ExceptionHandler(MyException.class)
     public void deleteUserById(int id) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER_BY_ID_QUERY)) {
@@ -107,9 +118,11 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error with SQL in deleteUserById method", e);
+            throw new MyException(e.getMessage());
         }
     }
 
+    @ExceptionHandler(MyException.class)
     public int verifyLoginData(String login, String password) {
         int result = -1;
         try (Connection connection = dataSource.getConnection();
@@ -125,6 +138,7 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in verifyLoginData method", e);
+            throw new MyException(e.getMessage());
         }
         return result;
     }
