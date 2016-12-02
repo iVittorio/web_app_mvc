@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static ru.innopolis.web.constants.Queries.ADD_LECTION_IN_JOURNAL;
 import static ru.innopolis.web.constants.Queries.SHOW_USER_JOURNAL;
@@ -18,6 +20,8 @@ import static ru.innopolis.web.constants.Queries.SHOW_USER_JOURNAL;
  * Created by i.viktor on 28/11/2016.
  */
 public class JournalDaoImpl implements JournalDao {
+    private Logger logger = LoggerFactory.getLogger(JournalDaoImpl.class);
+
     private DataSource dataSource;
 
     @Autowired
@@ -37,7 +41,7 @@ public class JournalDaoImpl implements JournalDao {
                 list.add(new Journal(id, name));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in showJurnalByIdUser method", e);
         }
         return list;
     }
@@ -50,7 +54,7 @@ public class JournalDaoImpl implements JournalDao {
             preparedStatement.setInt(2, id);
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in addEntryInJournal method", e);
         }
     }
 }

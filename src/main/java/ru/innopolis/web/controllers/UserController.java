@@ -1,5 +1,7 @@
 package ru.innopolis.web.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Controller
 public class UserController {
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
 
@@ -60,7 +63,7 @@ public class UserController {
             @RequestParam(name = "fullName") String fullName,
             @RequestParam(name = "email") String email,
             @RequestParam(name = "sex") String sex) {
-        userService.addUser(new User(0, login, fullName, email, Role.ROLE_STUDENT, Sex.valueOf(sex)), password);
+        userService.addUser(new User(0, login, email, fullName, Role.ROLE_STUDENT, Sex.valueOf(sex)), password);
         return "redirect:/signin";
     }
 }

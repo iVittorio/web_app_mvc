@@ -36,7 +36,7 @@
                                        "select login, password, true from users where login=?"
                                authorities-by-username-query=
                                        "select login, role from users where login =?"/>
-            <!--<password-encoder-->
+            <password-encoder hash="md5"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

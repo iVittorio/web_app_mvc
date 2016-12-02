@@ -1,6 +1,8 @@
 package ru.innopolis.web.dao;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.innopolis.web.beans.User;
 import ru.innopolis.web.constants.Role;
@@ -20,6 +22,8 @@ import static ru.innopolis.web.constants.Queries.*;
  * Created by i.viktor on 28/11/2016.
  */
 public class UserDaoImpl implements UserDao {
+    private Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+
     private DataSource dataSource;
 
     @Autowired
@@ -42,7 +46,7 @@ public class UserDaoImpl implements UserDao {
                 list.add(new User(id, login, email, fullName, role, sex));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in showUsers method", e);
         }
         return list;
     }
@@ -51,14 +55,14 @@ public class UserDaoImpl implements UserDao {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_QUERY)) {
             preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, DigestUtils.md5Hex(password));
             preparedStatement.setString(3, user.getFullName());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getSex().toString());
             preparedStatement.setString(6, user.getRole().toString());
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in addUser method", e);
         }
     }
 
@@ -77,7 +81,7 @@ public class UserDaoImpl implements UserDao {
                 user = new User(id, login, email, fullName, role, sex);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in getUserById method", e);
         }
         return user;
     }
@@ -92,7 +96,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(5, user.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in updateUser method", e);
         }
     }
 
@@ -102,7 +106,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in deleteUserById method", e);
         }
     }
 
@@ -120,7 +124,7 @@ public class UserDaoImpl implements UserDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in verifyLoginData method", e);
         }
         return result;
     }

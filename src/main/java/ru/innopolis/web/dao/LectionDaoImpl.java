@@ -1,5 +1,7 @@
 package ru.innopolis.web.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.innopolis.web.beans.Lection;
 
@@ -17,6 +19,7 @@ import static ru.innopolis.web.constants.Queries.*;
  * Created by i.viktor on 28/11/2016.
  */
 public class LectionDaoImpl implements LectionDao {
+    private Logger logger = LoggerFactory.getLogger(LectionDaoImpl.class);
 
     private DataSource dataSource;
 
@@ -37,7 +40,7 @@ public class LectionDaoImpl implements LectionDao {
                 lections.add(new Lection(id, name, text));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in getLections method", e);
         }
         return lections;
     }
@@ -55,7 +58,7 @@ public class LectionDaoImpl implements LectionDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in getLectionById method", e);
         }
         return lection;
     }
@@ -66,7 +69,7 @@ public class LectionDaoImpl implements LectionDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in deletLectionById method", e);
         }
     }
 
@@ -77,7 +80,7 @@ public class LectionDaoImpl implements LectionDao {
             preparedStatement.setString(2, lection.getText());
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in addLection method", e);
         }
     }
 
@@ -89,7 +92,7 @@ public class LectionDaoImpl implements LectionDao {
             preparedStatement.setInt(3, lection.getId());
             preparedStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Error with SQL in editLection method", e);
         }
     }
 }
