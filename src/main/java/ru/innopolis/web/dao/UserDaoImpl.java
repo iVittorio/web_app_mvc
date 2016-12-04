@@ -45,11 +45,12 @@ public class UserDaoImpl implements UserDao {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
                 String fullName = resultSet.getString("fullname");
                 String email = resultSet.getString("email");
                 Role role = Role.valueOf(resultSet.getString("role"));
                 Sex sex = Sex.valueOf(resultSet.getString("sex"));
-                list.add(new User(id, login, email, fullName, role, sex));
+                list.add(new User(id, login, password, email, fullName, role, sex));
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in showUsers method", e);
@@ -61,14 +62,13 @@ public class UserDaoImpl implements UserDao {
     /**
      * Add new user in database
      * @param user object user
-     * @param password hashed password
      */
     @ExceptionHandler({MyException.class})
-    public void addUser(User user, String password) {
+    public void addUser(User user) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_QUERY)) {
             preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, DigestUtils.md5Hex(password));
+            preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFullName());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getSex().toString());
@@ -94,11 +94,12 @@ public class UserDaoImpl implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
                 String fullName = resultSet.getString("fullname");
                 String email = resultSet.getString("email");
                 Role role = Role.valueOf(resultSet.getString("role"));
                 Sex sex = Sex.valueOf(resultSet.getString("sex"));
-                user = new User(id, login, email, fullName, role, sex);
+                user = new User(id, login, password, email, fullName, role, sex);
             }
         } catch (SQLException e) {
             logger.error("Error with SQL in getUserById method", e);

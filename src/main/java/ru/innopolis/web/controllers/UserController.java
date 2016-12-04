@@ -1,5 +1,6 @@
 package ru.innopolis.web.controllers;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class UserController {
             @RequestParam(name = "fullName") String fullName,
             @RequestParam(name = "email") String email,
             @RequestParam(name = "sex") String sex) {
-        userService.addUser(new User(0, login, email, fullName, Role.ROLE_STUDENT, Sex.valueOf(sex)), password);
+        userService.addUser(new User(0, login, DigestUtils.md5Hex(password), email, fullName, Role.ROLE_STUDENT, Sex.valueOf(sex)));
         return "redirect:/signin";
     }
 }

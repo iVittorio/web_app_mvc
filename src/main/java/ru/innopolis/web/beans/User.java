@@ -6,9 +6,11 @@ import ru.innopolis.web.constants.Sex;
 /**
  * Created by i.viktor on 28/11/2016.
  */
+
 public class User {
     private int id;
     private String login;
+    private String password;
     private String email;
     private String fullName;
     private Role role;
@@ -65,9 +67,18 @@ public class User {
         this.sex = sex;
     }
 
-    public User(int id, String login, String email, String fullName, Role role, Sex sex) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(int id, String login, String password, String email, String fullName, Role role, Sex sex) {
         this.id = id;
         this.login = login;
+        this.password = password;
         this.email = email;
         this.fullName = fullName;
         this.role = role;

@@ -11,5 +11,5 @@ public interface UserService {
 
     List<User> showUsers();
 
-    void addUser(User user, String password);
+    void addUser(User user);
 }
