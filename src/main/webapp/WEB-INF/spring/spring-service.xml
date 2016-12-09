@@ -8,6 +8,5 @@
 
     <bean id="userService" class="ru.innopolis.web.service.UserServiceImpl"/>
     <bean id="lectionService" class="ru.innopolis.web.service.LectionServiceImpl"/>
-    <bean id="journalService" class="ru.innopolis.web.service.JournalServiceImpl"/>
 
 </beans>

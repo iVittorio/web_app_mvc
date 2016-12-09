@@ -1,7 +1,8 @@
 package ru.innopolis.web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.innopolis.web.beans.Lection;
 import ru.innopolis.web.dao.LectionDao;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by i.viktor on 02/12/2016.
  */
-@Component
+@Service
 public class LectionServiceImpl implements LectionService {
 
     private LectionDao lectionDao;
@@ -21,27 +22,27 @@ public class LectionServiceImpl implements LectionService {
     }
 
 
-    @Override
+    @Transactional
     public List<Lection> getLections() {
         return lectionDao.getLections();
     }
 
-    @Override
+    @Transactional
     public void deleteLectionById(int id) {
         lectionDao.deletLectionById(id);
     }
 
-    @Override
+    @Transactional
     public Lection getLectionById(int id) {
         return lectionDao.getLectionById(id);
     }
 
-    @Override
+    @Transactional
     public void editLection(Lection lection) {
         lectionDao.editLection(lection);
     }
 
-    @Override
+    @Transactional
     public void addLection(Lection lection) {
         lectionDao.addLection(lection);
     }

@@ -1,22 +1,22 @@
 package ru.innopolis.web.dao;
 
+import ru.innopolis.web.beans.Lection;
 import ru.innopolis.web.beans.User;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by i.viktor on 30/11/2016.
  */
 public interface UserDao {
-    List<User> showUsers();
+    List showUsers();
 
     void addUser(User user);
 
-    User getUserById(int id);
+    Set<Lection> getUserLection(int id);
 
-    void updateUser(User user);
+    void addLectionInJournal(String login, int lection_id);
 
-    void deleteUserById(int id);
-
-    int verifyLoginData(String login, String password);
+    User getUserByLogin(String login);
 }

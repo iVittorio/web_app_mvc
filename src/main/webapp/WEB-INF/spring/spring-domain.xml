@@ -7,7 +7,6 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.spri
 
     <context:annotation-config/>
 
-    <bean id="userDao" class="ru.innopolis.web.dao.UserDaoImpl"/>
-    <bean id="lectionDao" class="ru.innopolis.web.dao.LectionDaoImpl"/>
-    <bean id="journalDao" class="ru.innopolis.web.dao.JournalDaoImpl"/>
+    <bean id="userDao" class="ru.innopolis.web.dao.UserDaoHibernate"/>
+    <bean id="lectionDao" class="ru.innopolis.web.dao.LectionDaoHibernate"/>
 </beans>

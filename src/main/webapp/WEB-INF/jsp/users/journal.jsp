@@ -9,7 +9,7 @@
     </tr>
     <c:forEach var="journal" items="${list}">
         <tr>
-            <td>${journal.lectionName}</td>
+            <td>${journal.name}</td>
         </tr>
     </c:forEach>
 </table>

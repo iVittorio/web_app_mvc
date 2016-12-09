@@ -1,20 +1,20 @@
 package ru.innopolis.web.exception;
 
+import org.hibernate.HibernateException;
+
 /**
  * Created by i.viktor on 02/12/2016.
  */
-public class MyException extends RuntimeException {
-    private String exceptionMsg;
-
-    public MyException(String exceptionMsg) {
-        this.exceptionMsg = exceptionMsg;
+public class MyException extends HibernateException {
+    public MyException(String message) {
+        super(message);
     }
 
-    public String getExceptionMsg(){
-        return this.exceptionMsg;
+    public MyException(Throwable cause) {
+        super(cause);
     }
 
-    public void setExceptionMsg(String exceptionMsg) {
-        this.exceptionMsg = exceptionMsg;
+    public MyException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

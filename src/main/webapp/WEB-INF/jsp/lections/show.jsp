@@ -5,7 +5,7 @@
 <h1>Read Lection</h1>
 <form:form method="POST" action="/lections/journal">
     <input type="hidden" name="login" value="${login}"/>
-    <input type="hidden" name="id" value="${lection.id}"/>
+    <input type="hidden" name="lection_id" value="${lection.id}"/>
     <table>
         <tr>
             <td>Name :</td>

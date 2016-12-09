@@ -14,13 +14,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+   <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <map>
                 <entry key="MyException" value="ErrorPage"/>
             </map>
         </property>
         <property name="defaultErrorView" value="ErrorPage"/>
-    </bean>
+    </bean>-->
 
 </beans>
